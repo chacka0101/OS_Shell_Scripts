@@ -1,0 +1,21 @@
+#!/bin/bash
+
+echo "
+		 ██████╗██╗  ██╗ █████╗  ██████╗██╗  ██╗ █████╗
+		██╔════╝██║  ██║██╔══██╗██╔════╝██║ ██╔╝██╔══██╗
+		██║     ███████║███████║██║     █████╔╝ ███████║
+		██║     ██╔══██║██╔══██║██║     ██╔═██╗ ██╔══██║
+		╚██████╗██║  ██║██║  ██║╚██████╗██║  ██╗██║  ██║
+		 ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝
+		 Colombia Hack Agent (CHackA)
+
+[...]	Developer:		Jairo A. García H.		[...]
+[...]	Version:		1.1.				[...]
+[...]	Codename:		'CHMOD for Shell Scripts'	[...]
+[...]	Report bugs to:		chacka0101@gmail.com 		[...]
+[...]	Homepage:		https://github.com/chacka0101/	[...]
+"
+chmod 777 chacka-kali-find-files.sh
+chmod 777 chacka-kali-services.sh
+chmod 777 chacka_kali_packages_debian.sh
+exit
