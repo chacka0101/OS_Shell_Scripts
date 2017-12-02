@@ -15,7 +15,23 @@ echo "
 [...]	Report bugs to:		chacka0101@gmail.com 		[...]
 [...]	Homepage:		https://github.com/chacka0101/	[...]
 "
+echo "chmod 777 chacka-kali-find-files.sh"
 chmod 777 chacka-kali-find-files.sh
+echo "chmod 777 chacka-kali-services.sh"
 chmod 777 chacka-kali-services.sh
+echo "chmod 777 chacka_kali_packages_debian.sh"
 chmod 777 chacka_kali_packages_debian.sh
+
+echo "
+[...]								[...]
+[...]								[...]
+
+Perfect, all Shell Scripts with CHMOD 777 privilege.
+
+"
+echo "#################################################"
+echo "#                     BYE                       #"
+echo "# The Matrix has you, follow the white rabbit.| #"
+echo "#################################################"
+# END
 exit
