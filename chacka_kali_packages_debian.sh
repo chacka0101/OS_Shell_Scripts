@@ -35,11 +35,11 @@ echo "##############################################"
             sudo dpkg -i sublime-text_build-3083_amd64.deb
             cd /opt/sublime_text/
             ./sublime_text
-            ;;
+	    ;;
         "Install RCCONF")
 echo "##############################################"
-            wget https://github.com/chacka0101/chacka0101/blob/master/rcconf_3.2_all.deb
-            sudo dpkg -i rcconf_3.2_all.deb
+            wget http://ftp.br.debian.org/debian/pool/main/r/rcconf/rcconf_3.2_all.deb
+            sudo apt-get install rcconf
             rcconf
             ;; 
         "Quit")
