@@ -11,7 +11,7 @@ echo "
 
 [...]	Developer:		Jairo A. García H.		[...]
 [...]	Version:		1.0.				[...]
-[...]	Codename:		'KALI Packages Devian'			[...]
+[...]	Codename:		'KALI Packages Debian'			[...]
 [...]	Report bugs to:		chacka0101@gmail.com 		[...]
 [...]	Homepage:		https://github.com/chacka0101/	[...]
 "
