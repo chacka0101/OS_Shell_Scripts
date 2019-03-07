@@ -1,2 +1,0 @@
-# Repository_Shell_Scripts_Kali_Linux 
-Repository_Shell_Srripts_Kali_Linux
