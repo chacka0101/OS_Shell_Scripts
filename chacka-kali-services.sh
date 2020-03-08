@@ -62,7 +62,7 @@ echo "##############################################"
             echo "Enter the persistence service:"
             echo "Example: ssh, apache2"
             read var_persistenceservice
-            sudo update-rc.d $var_persistenceservice enable
+            sudo systemctl enable $var_startservice
             ;;
         "Service Boot Persistence GUI - RCCONF")
 echo "##############################################"
@@ -75,8 +75,8 @@ echo "##############################################"
             echo "Enter the Text for the Index:"
 	    sudo systemctl start apache2
 	    sudo cd /var/www/html/index.html
+	    echo "Editamos el index.html"
 	    sudo nano /var/www/html/index.html
-            echo "Editamos el INDEX"
             python -m webbrowser http://127.0.0.1/index.html
             ;;
         "Quit")
