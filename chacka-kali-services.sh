@@ -21,59 +21,62 @@ echo "##############################################"
 echo "#                  MENU                      #"
 echo "##############################################"
 echo " "
-options=("Service Manager" "Netstat Service" "Start Service" "Restart Service" "Stop Service" "Service Boot Persistence" "Service Boot Persistence GUI - RCCONF" "Custom WEB" "Quit")
+options=("Service Manager" "Status Service" "Start Service" "Restart Service" "Stop Service" "Service Boot Persistence" "Service Boot Persistence GUI - RCCONF" "Custom WEB" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
         "Service Manager")
 echo "##############################################"
-            ls -la /etc/init.d/ | more
+            sudo ls -la /etc/init.d/ | more
             ;;
-        "Netstat Service")
+        "Status Service")
 echo "##############################################"
-            echo "Nestat Service:"
+            echo "Status Service:"
             echo "Example: sshd, apache2"
             read var_netstatservice
-            netstat -antp | grep $var_netstatservice
+           sudo systemctl status $var_startservice
             ;;
         "Start Service")
 echo "##############################################"
             echo "Start Service:"
             echo "Example: ssh, apache2."
             read var_startservice
-            service $var_startservice start
+            sudo systemctl start $var_startservice
             ;;
         "Restart Service")
 echo "##############################################"
             echo "Restart Service:"
             echo "Example: ssh, apache2"
             read var_restartservice
-            /etc/init.d/$var_restartservice restart
+            sudo systemctl restart $var_startservice
             ;;
         "Stop Service")
 echo "##############################################"
             echo "Stop Service:"
             echo "Example: ssh, apache2"
             read var_stopservice
-            service $var_stopservice stop
+            sudo systemctl stop $var_startservice
             ;;
         "Service Boot Persistence")
 echo "##############################################"
             echo "Enter the persistence service:"
             echo "Example: ssh, apache2"
             read var_persistenceservice
-            update-rc.d $var_persistenceservice enable
+            sudo update-rc.d $var_persistenceservice enable
             ;;
         "Service Boot Persistence GUI - RCCONF")
 echo "##############################################"
             echo "RCCONF:"
-            rcconf
+	    echo "Install: kali@kali:/$ sudo apt-get install rcconf"
+            sudo rcconf
             ;;
         "Custom WEB")
 echo "##############################################"
             echo "Enter the Text for the Index:"
-            read var_httpbanner
-            echo "$var_httpbanner" > /var/www/html/index.html
+	    sudo systemctl start apache2
+	    sudo cd /var/www/html/index.html
+	    sudo nano /var/www/html/index.html
+            echo "Editamos el INDEX"
             python -m webbrowser http://127.0.0.1/index.html
             ;;
         "Quit")
