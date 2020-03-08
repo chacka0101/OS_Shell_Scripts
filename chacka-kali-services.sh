@@ -67,7 +67,7 @@ echo "##############################################"
         "Service Boot Persistence GUI - RCCONF")
 echo "##############################################"
             echo "RCCONF:"
-	    echo "Install: kali@kali:/$ sudo apt install rcconf"
+	    sudo apt install rcconf
             sudo rcconf
             ;;
         "Custom WEB")
