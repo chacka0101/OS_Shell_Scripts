@@ -34,7 +34,7 @@ echo "##############################################"
             echo "Status Service:"
             echo "Example: sshd, apache2"
             read var_netstatservice
-           sudo systemctl status $var_startservice
+            sudo systemctl status $var_startservice
             ;;
         "Start Service")
 echo "##############################################"
