@@ -67,9 +67,9 @@ echo "##############################################"
             echo "# Create $var_ip on /home/chacka0101/targets/recon/$var_ip"
             echo "# OK."
             echo "# Recon recon_os.py:"
-            sudo python /home/chacka0101/tools/recon_os.py $var_ip > /home/chacka0101/targets/recon/$var_ip/$var_ip_recon_OS.txt
+            sudo python /home/chacka0101/tools/recon_os.py $var_ip > /home/chacka0101/targets/recon/$var_ip/recon_OS.txt
             echo "# OK."          
-            echo " Output: cat /home/chacka0101/recon/$var_ip/$var_ip_recon_OS.txt"
+            echo " Output: cat /home/chacka0101/targets/recon/$var_ip/recon_OS.txt"
             echo "# OK."
             ;;
         "Quit")
