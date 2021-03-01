@@ -13,7 +13,7 @@ echo "##############################################"
 echo "#                  MENU                      #"
 echo "##############################################"
 echo " "
-options=("Requirements" "Recon OS" "Exit")
+options=("Requirements" "Recon OS - Test ICMP - TraceRoute - Scan Ports NO ICMP - Commons UDP - ALL Ports TCP" "Exit")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -56,25 +56,56 @@ echo "##############################################"
             sudo chmod +x /home/chacka0101/tools/recon_os.py
             echo "# END."
             ;;
-        "Recon OS")
+        "Recon OS - Test ICMP - TraceRoute - Scan Ports NO ICMP - Commons UDP - ALL Ports TCP")
 echo "##############################################"
-            echo "# Recon OS"
+            echo "# Recon"
             echo "# ----------------------------"
             cd /home/chacka0101/targets/recon/
             echo "┌──(root💀kali)-[/]"
-            echo "└─# Set IP:"
+            echo "└─# Type target recon IP:"
             read var_ip
             sudo mkdir /home/chacka0101/targets/recon/$var_ip
             echo "# Create $var_ip on /home/chacka0101/targets/recon/$var_ip"
-            echo "# OK."
-            echo "# Recon recon_os.py:"
-            sudo python /home/chacka0101/tools/recon_os.py $var_ip > /home/chacka0101/targets/recon/$var_ip/recon_os.txt
-            echo "# OK."
-            echo "┌──(root💀kali)-[/]"
-            echo "└─# OS:"
-            cat /home/chacka0101/targets/recon/$var_ip/recon_os.txt
             echo "  "
-            echo " Output: /home/chacka0101/targets/recon/$var_ip/recon_os.txt"
+            echo "# OK."
+            echo "  "
+            echo "# Recon OS:"
+            sudo python /home/chacka0101/tools/recon_os.py $var_ip > /home/chacka0101/targets/recon/$var_ip/recon_os.txt
+            echo "┌──(root💀kali)-[/]"
+            echo "└─# Recon OS:"
+            cat /home/chacka0101/targets/recon/$var_ip/recon_os.txt     
+            echo "  " 
+            echo "# Test ICMP:"
+            sudo hping3 -1 -c 3 $var_ip > /home/chacka0101/targets/recon/$var_ip/hping3_ICMP.txt
+            echo "┌──(root💀kali)-[/]"
+            echo "└─# Result Test ICMP:"
+            cat /home/chacka0101/targets/recon/$var_ip/hping3_ICMP.txt            
+            echo "  " 
+            echo "# Test TraceRoute:"
+            sudo ping -R -c 1 $var_ip > /home/chacka0101/targets/recon/$var_ip/traceroute.txt
+            echo "┌──(root💀kali)-[/]"
+            echo "└─# Result Test TraceRoute:"
+            cat /home/chacka0101/targets/recon/$var_ip/traceroute.txt    
+            echo "  " 
+            echo "# Scan Ports NO ICMP:"
+            sudo nmap -Pn -sV -vv $var_ip > /home/chacka0101/targets/recon/$var_ip/ports_NoICMP.txt
+            echo "┌──(root💀kali)-[/]"
+            echo "└─# ResultScan Ports NO ICMP:"
+            cat /home/chacka0101/targets/recon/$var_ip/ports_NoICMP.txt  
+            echo "  " 
+            echo "# Scan coomons Ports UDP:"
+            sudo nmap -sU -p- --min-rate 10000 -vv $var_ip > /home/chacka0101/targets/recon/$var_ip/ports_UDP.txt
+            echo "┌──(root💀kali)-[/]"
+            echo "└─# Result Scan Scan coomons Ports UDP:"
+            cat /home/chacka0101/targets/recon/$var_ip/ports_UDP.txt  
+            echo "  " 
+            echo "# Scan ALL ports TCP:"
+            sudo masscan -e tun0 --open -p1-65535 --max-rate 1000 $var_ip > /home/chacka0101/targets/recon/$var_ip/ports_ALL.txt
+            echo "┌──(root💀kali)-[/]"
+            echo "└─# Result Scan ALL ports TCP:"
+            cat /home/chacka0101/targets/recon/$var_ip/ports_ALL.txt  
+            echo "  " 
+            echo " Output: /home/chacka0101/targets/recon/$var_ip/"
             echo "  "
             echo "# END."
             ;;
