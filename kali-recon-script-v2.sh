@@ -60,7 +60,7 @@ echo "##############################################"
 echo "##############################################"
             echo "# Recon OS"
             echo "# ----------------------------"
-            cd /home/chacka0101/recon/
+            cd /home/chacka0101/targets/recon/
             echo "┌──(root💀kali)-[/]"
             echo "└─# Set IP:"
             read var_ip
@@ -75,6 +75,7 @@ echo "##############################################"
             cat /home/chacka0101/targets/recon/$var_ip/recon_os.txt
             echo "  "
             echo " Output: /home/chacka0101/targets/recon/$var_ip/recon_os.txt"
+            echo "  "
             echo "# END."
             ;;
         "Exit")
