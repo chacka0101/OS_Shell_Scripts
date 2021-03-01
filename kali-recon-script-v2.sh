@@ -13,7 +13,7 @@ echo "##############################################"
 echo "#                  MENU                      #"
 echo "##############################################"
 echo " "
-options=("Requirements" "Recon OS - Test ICMP - TraceRoute - Scan Ports NO ICMP - Commons UDP - ALL Ports TCP" "Exit")
+options=("Requirements" "Recon OS - Test ICMP - TraceRoute - Scan Ports NO ICMP - Commons UDP - ALL Ports TCP" "Search in Kali Linux" "Exit")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -108,6 +108,27 @@ echo "##############################################"
             echo " Output: /home/chacka0101/targets/recon/$var_ip/"
             echo "  "
             echo "# END."
+            ;;
+        "Search in Kali Linux")
+echo "##############################################"
+            echo "Search in Kali Linux"
+            read var_locate
+            echo "Search with LOCATE:"
+            locate $var_locate | more
+            echo "Search with WHICH:"
+            which $var_locate | more
+            echo "Search with FIND:"
+            find / -name $var_locate* -exec file {} \; | more
+            find / -name $var_locate* | more
+            echo " "
+            echo " ---------  OTHER OPTIONS TO SEARCH ----------------"
+            echo "Search with meterpreter: kali@kali:~$ search -f *.txt "
+            echo " "
+            echo "Search Windows: "
+            echo "Change directory: C:\cd /D D:\ "
+            echo "Option 1: C:\>dir /b/s proof"
+            echo "Option 2: C:\>find /I "proof" C:\* "
+            echo " "
             ;;
         "Exit")
 echo " "
