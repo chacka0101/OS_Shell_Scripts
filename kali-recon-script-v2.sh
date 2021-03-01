@@ -1,19 +1,19 @@
 #!/bin/bash
 echo "
-               Colombia Hacking Agent (CHackA0101)
+                      CHackA0101
 [...]   Developer:              Jairo Garcia		        [...]
 [...]   Version:                2.0.                            [...]
 [...]   Codename:               'kali-recon-script-v2.sh'       [...]
 [...]   Report bugs to:         chacka0101 @ gmail.com          [...]
 [...]   Homepage:               https://github.com/chacka0101/  [...]
 "
-PS3='# Enter option or pulse "Enter" to Menu or other options: '
+PS3='└─# Press "Enter" or press (3) to exit: '
 echo " "
 echo "##############################################"
 echo "#                  MENU                      #"
 echo "##############################################"
 echo " "
-options=("Requirements" "Recon OS" "Quit")
+options=("Requirements" "Recon OS" "Exit")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -54,7 +54,7 @@ echo "##############################################"
             echo "# Download recon_os.py:" 
             sudo wget https://raw.githubusercontent.com/chacka0101/exploits/master/recon_os.py
             sudo chmod +x /home/chacka0101/tools/recon_os.py
-            echo "# OK."
+            echo "# END."
             ;;
         "Recon OS")
 echo "##############################################"
@@ -73,10 +73,11 @@ echo "##############################################"
             echo "┌──(root💀kali)-[/]"
             echo "└─# OS:"
             cat /home/chacka0101/targets/recon/$var_ip/recon_os.txt
+            echo "  "
             echo " Output: /home/chacka0101/targets/recon/$var_ip/recon_os.txt"
-            echo "# OK."
+            echo "# END."
             ;;
-        "Quit")
+        "Exit")
 echo " "
 echo " "
 echo "#################################################"
