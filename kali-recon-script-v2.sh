@@ -3,7 +3,7 @@ echo "
                Colombia Hacking Agent (CHackA0101)
 [...]   Developer:              Jairo Garcia		        [...]
 [...]   Version:                2.0.                            [...]
-[...]   Codename:               'kali-recon-script-v2.sh'			      	[...]
+[...]   Codename:               'kali-recon-script-v2.sh'		        [...]
 [...]   Report bugs to:         chacka0101 @ gmail.com          [...]
 [...]   Homepage:               https://github.com/chacka0101/  [...]
 "
