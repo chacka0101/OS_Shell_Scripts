@@ -62,7 +62,8 @@ echo "##############################################"
             echo "# ----------------------------"
             cd /home/chacka0101/recon/
             echo "┌──(root💀kali)-[/]"
-            echo "└─#" read var_ip
+            echo "└─# Set IP:"
+            read var_ip
             sudo mkdir /home/chacka0101/targets/recon/$var_ip
             echo "# Create $var_ip on /home/chacka0101/targets/recon/$var_ip"
             echo "# OK."
