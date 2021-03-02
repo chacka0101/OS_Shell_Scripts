@@ -23,7 +23,8 @@ echo "##############################################"
             echo "# Create directory: /home/chacka0101/tools"
             echo "# Create directory: /home/chacka0101/targets"
             echo "# Create directory: /home/chacka0101/targets/recon"
-            sudo mkdir {tools,targets}
+            echo "# Create directory: /home/chacka0101/targets/recon/web"
+            sudo mkdir {tools,targets}            
             cd /home/chacka0101/targets/
             sudo mkdir recon
             echo "# OK."
@@ -122,7 +123,6 @@ echo "##############################################"
 echo "##############################################"
             echo "# Recon WEB"
             echo "# ----------------------------"
-            cd /home/chacka0101/targets/recon/web
             echo "┌──(root💀kali)-[/]"
             echo "└─# Type WEB IP: "
             read var_ip
@@ -130,37 +130,38 @@ echo "##############################################"
             read var_protocol
             echo "└─# Type WEB Port: "
             read var_port
+            sudo mkdir /home/chacka0101/targets/recon/var_ip
             sudo mkdir /home/chacka0101/targets/recon/var_ip/web
             echo "  " 
             echo "# Scan WEB Headers"
-            sudo finalrecon --headers $var_protocol//:$var_ip:var_port/ > /home/chacka0101/targets/recon/var_ip/web/scan_headers.txt
+            sudo finalrecon --headers $var_protocol://$var_ip:var_port/ > /home/chacka0101/targets/recon/var_ip/web/scan_headers.txt
             echo "┌──(root💀kali)-[/]"
             echo "└─# Result Scan WEB Headers:"
             cat /home/chacka0101/targets/recon/var_ip/web/scan_headers.txt  
             echo "  "
             echo "# Scan WEB Tech WAD"
-            sudo wad -u $var_protocol//:$var_ip:var_port/ > /home/chacka0101/targets/recon/var_ip/web/scan_web_tech_whatweb.txtscan_web_tech_wad.txt
+            sudo wad -u $var_protocol://$var_ip:var_port/ > /home/chacka0101/targets/recon/var_ip/web/scan_web_tech_whatweb.txtscan_web_tech_wad.txt
             echo "# Scan WEB Tech WhatWEB"
-            sudo /home/chacka0101/tools/WhatWeb/.whatweb $var_protocol//:$var_ip:var_port/ > /home/chacka0101/targets/recon/var_ip/web/scan_web_tech_whatweb.txt
+            sudo /home/chacka0101/tools/WhatWeb/.whatweb $var_protocol://$var_ip:var_port/ > /home/chacka0101/targets/recon/var_ip/web/scan_web_tech_whatweb.txt
             echo "  "
             echo "┌──(root💀kali)-[/]"
             echo "└─# Result Scan WEB Tech WAD:"
-            cat /home/chacka0101/targets/recon/$var_url/scan_web_tech_wad.txt  
+            cat /home/chacka0101/targets/recon/var_ip/web/scan_web_tech_wad.txt  
             echo "└─# Result Scan WEB Tech WhatWeb:"
-            cat /home/chacka0101/targets/recon/$var_url/scan_web_tech_whatweb.txt     
+            cat /home/chacka0101/targets/recon/var_ip/web/scan_web_tech_whatweb.txt     
             echo "  " 
             echo "# Scan WEB Directories with GoBuster"
-            sudo gobuster dir -e -k -u $var_protocol//:$var_ip:var_port/ -w /usr/share/wordlists/dirb/common.txt -t 50 > /home/chacka0101/targets/recon/var_ip/web/https_web_common.txt
+            sudo gobuster dir -e -k -u $var_protocol://$var_ip:var_port/ -w /usr/share/wordlists/dirb/common.txt -t 50 > /home/chacka0101/targets/recon/var_ip/web/https_web_common.txt
             echo "# 100% Complete HTTPS Common (https_web_common.txt)"
-            sudo gobuster dir -e -u $var_protocol//:$var_ip:var_port/ -w /usr/share/wordlists/dirb/common.txt -t 50 > /home/chacka0101/targets/recon/var_ip/web/http_web_common.txt  
+            sudo gobuster dir -e -u $var_protocol://$var_ip:var_port/ -w /usr/share/wordlists/dirb/common.txt -t 50 > /home/chacka0101/targets/recon/var_ip/web/http_web_common.txt  
             echo "# 100% Complete HTTP Common (https_web_common.txt)"
-            sudo gobuster dir -e -k -u $var_protocol//:$var_ip:var_port/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt > /home/chacka0101/targets/recon/var_ip/web/https_web_medium.txt
+            sudo gobuster dir -e -k -u $var_protocol://$var_ip:var_port/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt > /home/chacka0101/targets/recon/var_ip/web/https_web_medium.txt
             echo "# 100% Complete HTTPS Medium (http_web_medium.txt)"
-            sudo gobuster dir -e -u $var_protocol//:$var_ip:var_port/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt > /home/chacka0101/targets/recon/var_ip/web/http_web_medium.txt
+            sudo gobuster dir -e -u $var_protocol://$var_ip:var_port/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt > /home/chacka0101/targets/recon/var_ip/web/http_web_medium.txt
             echo "# 100% Complete HTTP Medium (http_web_medium.txt)"          
-            sudo gobuster dir -e -k -u $var_protocol//:$var_ip:var_port/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -t 100 -x .php,.txt,.html,.sh,.py,.pl,.cgi -s "204,301,302,307,200,403" -a CustomAgent -o /home/chacka0101/targets/recon/var_ip/web/https_web_custom.txt
+            sudo gobuster dir -e -k -u $var_protocol://$var_ip:var_port/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -t 100 -x .php,.txt,.html,.sh,.py,.pl,.cgi -s "204,301,302,307,200,403" -a CustomAgent -o /home/chacka0101/targets/recon/var_ip/web/https_web_custom.txt
             echo "# 100% Complete HTTPS Custom (https_web_custom.txt)"
-            sudo gobuster dir -e -u $var_protocol//:$var_ip:var_port/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -t 100 -x .php,.txt,.html,.sh,.py,.pl,.cgi -s "204,301,302,307,200,403" -a CustomAgent -o /home/chacka0101/targets/recon/var_ip/web/http_web_custom.txt
+            sudo gobuster dir -e -u $var_protocol://$var_ip:var_port/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -t 100 -x .php,.txt,.html,.sh,.py,.pl,.cgi -s "204,301,302,307,200,403" -a CustomAgent -o /home/chacka0101/targets/recon/var_ip/web/http_web_custom.txt
             echo "# 100% Complete HTTP Custom (http_web_custom.txt)"
             echo "  "
             echo " Output: cd /home/chacka0101/targets/recon/var_ip/web/"
