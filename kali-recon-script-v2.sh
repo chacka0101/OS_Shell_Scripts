@@ -163,6 +163,7 @@ echo "##############################################"
             echo " Output: cd /home/chacka0101/targets/recon/$var_url/"
             echo "  "
             echo "# END."
+            ;;
         "Search in Kali Linux")
 echo "##############################################"
             echo "Search in Kali Linux"
