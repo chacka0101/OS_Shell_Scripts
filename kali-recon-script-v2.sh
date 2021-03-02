@@ -7,7 +7,7 @@ echo "
 [...]   Report bugs to:         chacka0101 @ gmail.com          [...]
 [...]   Homepage:               https://github.com/chacka0101/  [...]
 "
-PS3='└─# Press "Enter" or press (3) to exit: '
+PS3='└─# Press "Enter" or press (5) to exit: '
 echo " "
 echo "##############################################"
 echo "#                  MENU                      #"
