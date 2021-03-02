@@ -183,6 +183,7 @@ echo "##############################################"
             echo "Option 1: C:\>dir /b/s proof"
             echo "Option 2: C:\>find /I "proof" C:\* "
             echo " "
+            echo "# END."
             ;;
         "Exit")
 echo " "
