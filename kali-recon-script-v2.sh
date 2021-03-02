@@ -13,7 +13,7 @@ echo "##############################################"
 echo "#                  MENU                      #"
 echo "##############################################"
 echo " "
-options=("Requirements" "Recon OS - Test ICMP - TraceRoute - Scan Ports NO ICMP - Commons UDP - ALL Ports TCP" "Search in Kali Linux" "Exit")
+options=("Requirements" "Recon OS - Test ICMP - TraceRoute - Scan Ports NO ICMP - Commons UDP - ALL Ports TCP" "Recon WEB" "Search in Kali Linux" "Exit")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -54,6 +54,15 @@ echo "##############################################"
             echo "# Download recon_os.py:" 
             sudo wget https://raw.githubusercontent.com/chacka0101/exploits/master/recon_os.py
             sudo chmod +x /home/chacka0101/tools/recon_os.py
+            echo "# Download WhatWeb:"
+            sudo git clone https://github.com/urbanadventurer/WhatWeb.git
+            echo "# OK."
+            echo "# Install GoBuster:"
+            echo "deb-src http://http.kali.org/kali kali-rolling main non-free contrib" >> /etc/apt/sources.list
+            sudo apt update
+            sudo apt-get install gobuster
+            echo "# OK."
+            echo "  "
             echo "# END."
             ;;
         "Recon OS - Test ICMP - TraceRoute - Scan Ports NO ICMP - Commons UDP - ALL Ports TCP")
@@ -105,10 +114,55 @@ echo "##############################################"
             echo "└─# Result Scan ALL ports TCP:"
             cat /home/chacka0101/targets/recon/$var_ip/ports_ALL.txt  
             echo "  " 
-            echo " Output: /home/chacka0101/targets/recon/$var_ip/"
+            echo " Output: cd /home/chacka0101/targets/recon/$var_ip/"
             echo "  "
             echo "# END."
             ;;
+        "Recon WEB")
+echo "##############################################"
+            echo "# Recon WEB"
+            echo "# ----------------------------"
+            cd /home/chacka0101/targets/recon/web
+            echo "┌──(root💀kali)-[/]"
+            echo "└─# Type URL (Example http://10.10.10.1.3:80/ or https://10.10.10.1.3:433/ or other port https://10.10.10.1.3:8080/ : "
+            read var_url
+            sudo mkdir /home/chacka0101/targets/recon/$var_url
+            echo "  " 
+            echo "# Scan WEB Headers"
+            sudo finalrecon --headers $var_url > /home/chacka0101/targets/recon/$var_url/scan_headers.txt
+            echo "┌──(root💀kali)-[/]"
+            echo "└─# Result Scan WEB Headers:"
+            cat /home/chacka0101/targets/recon/$var_url/scan_headers.txt  
+            echo "  "
+            echo "  " 
+            echo "# Scan WEB Tech WAD"
+            sudo wad -u $var_url > /home/chacka0101/targets/recon/$var_url/scan_web_tech_wad.txt
+            echo "# Scan WEB Tech WhatWEB"
+            sudo /home/chacka0101/tools/WhatWeb/.whatweb $var_url > /home/chacka0101/targets/recon/$var_url/scan_web_tech_whatweb.txt
+            echo "  "
+            echo "┌──(root💀kali)-[/]"
+            echo "└─# Result Scan WEB Tech WAD:"
+            cat /home/chacka0101/targets/recon/$var_url/scan_web_tech_wad.txt  
+            echo "└─# Result Scan WEB Tech WhatWeb:"
+            cat /home/chacka0101/targets/recon/$var_url/scan_web_tech_whatweb.txt     
+            echo "  " 
+            echo "# Scan WEB Directories with GoBuster"
+            sudo gobuster dir -e -k -u $var_url -w /usr/share/wordlists/dirb/common.txt -t 50 > https_web_common.txt
+            echo "# 100% Complete HTTPS Common (https_web_common.txt)"
+            sudo gobuster dir -e -u $var_url -w /usr/share/wordlists/dirb/common.txt -t 50 > http_web_common.txt  
+            echo "# 100% Complete HTTP Common (https_web_common.txt)"
+            sudo gobuster dir -e -k -u $var_url -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt > https_web_medium.txt
+            echo "# 100% Complete HTTPS Medium (http_web_medium.txt)"
+            sudo gobuster dir -e -u $var_url -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt > http_web_medium.txt
+            echo "# 100% Complete HTTP Medium (http_web_medium.txt)"          
+            sudo gobuster dir -e -k -u $var_url -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -t 100 -x .php,.txt,.html,.sh,.py,.pl,.cgi -s "204,301,302,307,200,403" -a CustomAgent -o https_web_custom.txt
+            echo "# 100% Complete HTTPS Custom (https_web_custom.txt)"
+            sudo gobuster dir -e -u $var_url -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -t 100 -x .php,.txt,.html,.sh,.py,.pl,.cgi -s "204,301,302,307,200,403" -a CustomAgent -o http_web_custom.txt
+            echo "# 100% Complete HTTP Custom (http_web_custom.txt)"
+            echo "  "
+            echo " Output: cd /home/chacka0101/targets/recon/$var_url/"
+            echo "  "
+            echo "# END."
         "Search in Kali Linux")
 echo "##############################################"
             echo "Search in Kali Linux"
