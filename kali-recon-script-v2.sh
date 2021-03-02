@@ -105,7 +105,7 @@ echo "##############################################"
             echo "# Scan coomons Ports UDP:"
             sudo nmap -sU -p- --min-rate 10000 -vv $var_ip > /home/chacka0101/targets/recon/$var_ip/ports_UDP.txt
             echo "┌──(root💀kali)-[/]"
-            echo "└─# Result Scan Scan coomons Ports UDP:"
+            echo "└─# Result Scan Scan commons Ports UDP:"
             cat /home/chacka0101/targets/recon/$var_ip/ports_UDP.txt  
             echo "  " 
             echo "# Scan ALL ports TCP:"
