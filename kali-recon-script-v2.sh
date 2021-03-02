@@ -6,14 +6,15 @@ echo "
 [...]   Codename:               'kali-recon-script-v2.sh'       [...]
 [...]   Report bugs to:         chacka0101 @ gmail.com          [...]
 [...]   Homepage:               https://github.com/chacka0101/  [...]
+
 "
-PS3='└─# Press "Enter" or press (5) to exit: '
+PS3='└─# Press "Enter" or press (4) to exit: '
 echo " "
 echo "##############################################"
 echo "#                  MENU                      #"
 echo "##############################################"
 echo " "
-options=("Requirements" "Recon OS - Test ICMP - TraceRoute - Scan Ports NO ICMP - Commons UDP - ALL Ports TCP" "Recon WEB" "Search in Kali Linux" "Exit")
+options=("Requirements" "Recon OS - Test ICMP - TraceRoute - Scan Ports NO ICMP - Commons UDP - ALL Ports TCP" "Recon WEB" "Exit")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -128,66 +129,42 @@ echo "##############################################"
             read var_ip
             echo "└─# Type WEB protocol (http or https): "
             read var_protocol
-            echo "└─# Type WEB Port: "
-            read var_portit
-            sudo mkdir /home/chacka0101/targets/recon/var_ip
-            sudo mkdir /home/chacka0101/targets/recon/var_ip/web
+            sudo mkdir /home/chacka0101/targets/recon/$var_ip/
+            sudo mkdir /home/chacka0101/targets/recon/$var_ip/web
             echo "  " 
             echo "# Scan WEB Headers"
-            sudo finalrecon --headers $var_protocol://$var_ip/ > /home/chacka0101/targets/recon/var_ip/web/scan_headers.txt
+            sudo finalrecon --headers $var_protocol://$var_ip/ > /home/chacka0101/targets/recon/$var_ip/web/scan_headers.txt
             echo "┌──(root💀kali)-[/]"
             echo "└─# Result Scan WEB Headers:"
-            cat /home/chacka0101/targets/recon/var_ip/web/scan_headers.txt  
+            cat /home/chacka0101/targets/recon/$var_ip/web/scan_headers.txt  
             echo "  "
             echo "# Scan WEB Tech WAD"
-            sudo wad -u $var_protocol://$var_ip/ > /home/chacka0101/targets/recon/var_ip/web/scan_web_tech_whatweb.txtscan_web_tech_wad.txt
+            sudo wad -u $var_protocol://$var_ip/ > /home/chacka0101/targets/recon/$var_ip/web/scan_web_tech_wad.txt
             echo "# Scan WEB Tech WhatWEB"
-            sudo /home/chacka0101/tools/WhatWeb/.whatweb $var_protocol://$var_ip/ > /home/chacka0101/targets/recon/var_ip/web/scan_web_tech_whatweb.txt
+            sudo /home/chacka0101/tools/WhatWeb/whatweb $var_protocol://$var_ip/ > /home/chacka0101/targets/recon/$var_ip/web/scan_web_tech_whatweb.txt
             echo "  "
             echo "┌──(root💀kali)-[/]"
             echo "└─# Result Scan WEB Tech WAD:"
-            cat /home/chacka0101/targets/recon/var_ip/web/scan_web_tech_wad.txt  
+            cat /home/chacka0101/targets/recon/$var_ip/web/scan_web_tech_wad.txt
             echo "└─# Result Scan WEB Tech WhatWeb:"
-            cat /home/chacka0101/targets/recon/var_ip/web/scan_web_tech_whatweb.txt     
+            cat /home/chacka0101/targets/recon/$var_ip/web/scan_web_tech_whatweb.txt    
             echo "  " 
             echo "# Scan WEB Directories with GoBuster"
-            sudo gobuster dir -e -k -u $var_protocol://$var_ip/ -w /usr/share/wordlists/dirb/common.txt -t 50 > /home/chacka0101/targets/recon/var_ip/web/https_web_common.txt
+            sudo gobuster dir -e -k -u $var_protocol://$var_ip/ -w /usr/share/wordlists/dirb/common.txt -t 50 > /home/chacka0101/targets/recon/$var_ip/web/https_web_common.txt
             echo "# 100% Complete HTTPS Common (https_web_common.txt)"
-            sudo gobuster dir -e -u $var_protocol://$var_ip/ -w /usr/share/wordlists/dirb/common.txt -t 50 > /home/chacka0101/targets/recon/var_ip/web/http_web_common.txt  
+            sudo gobuster dir -e -u $var_protocol://$var_ip/ -w /usr/share/wordlists/dirb/common.txt -t 50 > /home/chacka0101/targets/recon/$var_ip/web/http_web_common.txt  
             echo "# 100% Complete HTTP Common (https_web_common.txt)"
-            sudo gobuster dir -e -k -u $var_protocol://$var_ip/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt > /home/chacka0101/targets/recon/var_ip/web/https_web_medium.txt
+            sudo gobuster dir -e -k -u $var_protocol://$var_ip/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt > /home/chacka0101/targets/recon/$var_ip/web/https_web_medium.txt
             echo "# 100% Complete HTTPS Medium (http_web_medium.txt)"
-            sudo gobuster dir -e -u $var_protocol://$var_ip/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt > /home/chacka0101/targets/recon/var_ip/web/http_web_medium.txt
+            sudo gobuster dir -e -u $var_protocol://$var_ip/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt > /home/chacka0101/targets/recon/$var_ip/web/http_web_medium.txt
             echo "# 100% Complete HTTP Medium (http_web_medium.txt)"          
-            sudo gobuster dir -e -k -u $var_protocol://$var_ip/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -t 100 -x .php,.txt,.html,.sh,.py,.pl,.cgi -s "204,301,302,307,200,403" -a CustomAgent -o /home/chacka0101/targets/recon/var_ip/web/https_web_custom.txt
+            sudo gobuster dir -e -k -u $var_protocol://$var_ip/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -t 100 -x .php,.txt,.html,.sh,.py,.pl,.cgi -s "204,301,302,307,200,403" -a CustomAgent -o /home/chacka0101/targets/recon/$var_ip/web/https_web_custom.txt
             echo "# 100% Complete HTTPS Custom (https_web_custom.txt)"
-            sudo gobuster dir -e -u $var_protocol://$var_ip/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -t 100 -x .php,.txt,.html,.sh,.py,.pl,.cgi -s "204,301,302,307,200,403" -a CustomAgent -o /home/chacka0101/targets/recon/var_ip/web/http_web_custom.txt
+            sudo gobuster dir -e -u $var_protocol://$var_ip/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -t 100 -x .php,.txt,.html,.sh,.py,.pl,.cgi -s "204,301,302,307,200,403" -a CustomAgent -o /home/chacka0101/targets/recon/$var_ip/web/http_web_custom.txt
             echo "# 100% Complete HTTP Custom (http_web_custom.txt)"
             echo "  "
-            echo " Output: cd /home/chacka0101/targets/recon/var_ip/web/"
+            echo " Output: cd /home/chacka0101/targets/recon/$var_ip/web/"
             echo "  "
-            echo "# END."
-            ;;
-        "Search in Kali Linux")
-echo "##############################################"
-            echo "Search in Kali Linux"
-            read var_locate
-            echo "Search with LOCATE:"
-            locate $var_locate | more
-            echo "Search with WHICH:"
-            which $var_locate | more
-            echo "Search with FIND:"
-            find / -name $var_locate* -exec file {} \; | more
-            find / -name $var_locate* | more
-            echo " "
-            echo " ---------  OTHER OPTIONS TO SEARCH ----------------"
-            echo "Search with meterpreter: kali@kali:~$ search -f *.txt "
-            echo " "
-            echo "Search Windows: "
-            echo "Change directory: C:\cd /D D:\ "
-            echo "Option 1: C:\>dir /b/s proof"
-            echo "Option 2: C:\>find /I "proof" C:\* "
-            echo " "
             echo "# END."
             ;;
         "Exit")
