@@ -36,7 +36,7 @@ echo "##############################################"
             sudo wget https://raw.githubusercontent.com/chacka0101/exploits/master/nmap-bootstrap-xsl
             sudo chmod +x /home/chacka0101/tools/nmap-bootstrap-xsl
             echo "# OK."
-            echo "# Install WAD - Web application detector:" 
+            echo "# Install PIP:" 
             sudo apt-get install pip
             echo "# OK."
             echo "# Install WAD - Web application detector:" 
@@ -70,55 +70,91 @@ echo "##############################################"
         "Recon OS - Test ICMP - TraceRoute - Scan Ports NO ICMP - Commons UDP - ALL Ports TCP")
 echo "##############################################"
             echo "# Recon"
-            echo "# ----------------------------"
+            echo "# ---------------------------------------------------------"
             cd /home/chacka0101/targets/recon/
             echo "┌──(root💀kali)-[/]"
             echo "└─# Type target recon IP:"
             read var_ip
             sudo mkdir /home/chacka0101/targets/recon/$var_ip
+            base_directory=/home/chacka0101/targets/recon/$var_ip
             echo "# Create $var_ip on /home/chacka0101/targets/recon/$var_ip"
             echo "  "
             echo "# OK."
             echo "  "
             echo "# Recon OS:"
+            echo "  "
             sudo python /home/chacka0101/tools/recon_os.py $var_ip > /home/chacka0101/targets/recon/$var_ip/recon_os.txt
             echo "┌──(root💀kali)-[/]"
             echo "└─# Recon OS:"
             cat /home/chacka0101/targets/recon/$var_ip/recon_os.txt     
             echo "  " 
             echo "# Test ICMP:"
-            sudo hping3 -1 -c 3 $var_ip > /home/chacka0101/targets/recon/$var_ip/hping3_ICMP.txt
+            echo "  "
+            sudo hping3 -1 -c 3 $var_ip > /home/chacka0101/targets/recon/$var_ip/hping3_icmp.txt
             echo "┌──(root💀kali)-[/]"
             echo "└─# Result Test ICMP:"
-            cat /home/chacka0101/targets/recon/$var_ip/hping3_ICMP.txt            
+            cat /home/chacka0101/targets/recon/$var_ip/hping3_icmp.txt            
             echo "  " 
             echo "# Test TraceRoute:"
+            echo "  "
             sudo ping -R -c 1 $var_ip > /home/chacka0101/targets/recon/$var_ip/traceroute.txt
             echo "┌──(root💀kali)-[/]"
             echo "└─# Result Test TraceRoute:"
             cat /home/chacka0101/targets/recon/$var_ip/traceroute.txt    
             echo "  " 
             echo "# Scan Ports NO ICMP:"
-            sudo nmap -Pn -sV -vv $var_ip > /home/chacka0101/targets/recon/$var_ip/ports_NoICMP.txt
+            sudo nmap -Pn -sV -oG $base_directory/tmp_ports_noICMP.txt -vv $var_ip > /home/chacka0101/targets/recon/$var_ip/ports_noicmp.txt
             echo "┌──(root💀kali)-[/]"
             echo "└─# ResultScan Ports NO ICMP:"
-            cat /home/chacka0101/targets/recon/$var_ip/ports_NoICMP.txt  
+            cat /home/chacka0101/targets/recon/$var_ip/ports_noicmp.txt
             echo "  " 
-            echo "# Scan coomons Ports UDP:"
-            sudo nmap -sU -p- --min-rate 10000 -vv $var_ip > /home/chacka0101/targets/recon/$var_ip/ports_UDP.txt
+            echo "# Scan commons Ports UDP:"
+            echo "  "
+            sudo nmap -sU -p- --min-rate 10000 -oG $base_directory/tmp_ports_udp.txt -vv $var_ip > /home/chacka0101/targets/recon/$var_ip/ports_udp.txt
             echo "┌──(root💀kali)-[/]"
             echo "└─# Result Scan Scan commons Ports UDP:"
-            cat /home/chacka0101/targets/recon/$var_ip/ports_UDP.txt  
+            cat /home/chacka0101/targets/recon/$var_ip/ports_udp.txt 
             echo "  " 
             echo "# Scan ALL ports TCP:"
-            sudo masscan -e tun0 --open -p1-65535 --max-rate 1000 $var_ip > /home/chacka0101/targets/recon/$var_ip/ports_ALL.txt
+            sudo masscan -e tun0 --open -p1-65535 --max-rate 1000 $var_ip > /home/chacka0101/targets/recon/$var_ip/ports_all.txt
             echo "┌──(root💀kali)-[/]"
             echo "└─# Result Scan ALL ports TCP:"
-            cat /home/chacka0101/targets/recon/$var_ip/ports_ALL.txt  
+            cat /home/chacka0101/targets/recon/$var_ip/ports_all.txt 
             echo "  " 
-            echo " Output: cd /home/chacka0101/targets/recon/$var_ip/"
+            cat /home/chacka0101/targets/recon/$var_ip/ports_all.txt | grep open | cut -d ' ' -f 4 | cut -d '/' -f 1 > $base_directory/tmp_port_list.txt
+            cat $base_directory/tmp_ports_noICMP.txt | grep -oP '\d{1,5}/open' | cut -d '/' -f 1 >> $base_directory/tmp_port_list.txt
+            cat $base_directory/tmp_ports_udp.txt | grep -oP '\d{1,5}/open' | cut -d '/' -f 1 >> $base_directory/tmp_port_list.txt
+            open_ports=$(sort -n $base_directory/tmp_port_list.txt  | uniq | xargs | tr ' ' ',')
+            rm $base_directory/tmp_ports_noICMP.txt $base_directory/tmp_ports_udp.txt $base_directory/tmp_port_list.txt
+            echo "┌──(root💀kali)-[/]"
+            echo "└─# List specific ports:"
+			echo "  " 
+            echo $open_ports
+			echo "  "
+            echo "# Scan specific ports:"
+			echo "  "
+            sudo nmap -sV -sC -A -p $open_ports -vv $var_ip > /home/chacka0101/targets/recon/$var_ip/specific_scan_ports.txt
+            echo "┌──(root💀kali)-[/]"
+            echo "└─# Result Scan CUSTOM ports:"
+            cat /home/chacka0101/targets/recon/$var_ip/specific_scan_ports.txt
+			echo "  "
+            echo "# Scan specific ports with nmap-bootstrap:"
+			echo "  "
+			sudo nmap -T4 -sC -sV -v -p $open_ports -oA $base_directory/specific_scan_ports_html --script vuln --stylesheet nmap-bootstrap.xsl $var_ip
+			sudo xsltproc -o /home/chacka0101/targets/recon/$var_ip/specific_scan_ports_html.html /home/chacka0101/tools/nmap-bootstrap-xsl /home/chacka0101/targets/recon/$var_ip/specific_scan_ports_html.xml
+            echo "┌──(root💀kali)-[/]"
+            echo "└─# Result Scan specific ports with nmap-bootstrap:"
             echo "  "
+			echo " Output nmap-bootstrap result: cd /home/chacka0101/targets/recon/$var_ip/specific_scan_ports_html.html" 
+			echo "  "
+			echo "# ---------------------------------------------------------"
+			echo "  " 
+            echo " ----- All Output results: cd /home/chacka0101/targets/recon/$var_ip/  -----"
+            echo "  "
+			echo "# ---------------------------------------------------------"
             echo "# END."
+            echo "  "
+            echo "  "
             ;;
         "Recon WEB")
 echo "##############################################"
