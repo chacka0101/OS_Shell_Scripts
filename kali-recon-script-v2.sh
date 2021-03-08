@@ -1,7 +1,7 @@
 #!/bin/bash
 echo "
                       CHackA0101
-[...]   Developers:             CHackA0101 and DesertH4wk     [...]
+[...]   Developers:             CHackA0101 and DesertH4wk       [...]
 [...]   Version:                2.0.                            [...]
 [...]   Codename:               'kali-recon-script-v2.sh'       [...]
 [...]   Report bugs to:         chacka0101 @ gmail.com          [...]
