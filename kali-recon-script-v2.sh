@@ -35,6 +35,7 @@ echo "##############################################"
             echo "# Download nmap-bootstrap.xsl:"         
             sudo wget https://raw.githubusercontent.com/chacka0101/exploits/master/nmap-bootstrap-xsl
             sudo chmod +x /home/chacka0101/tools/nmap-bootstrap-xsl
+            sudo apt-get install xsltproc
             echo "# OK."
             echo "# Install PIP:" 
             sudo apt-get install pip
@@ -190,14 +191,6 @@ echo "##############################################"
             echo "# 100% Complete HTTPS Common (https_web_common.txt)"
             sudo gobuster dir -e -u $var_protocol://$var_ip/ -w /usr/share/wordlists/dirb/common.txt -t 50 > /home/chacka0101/targets/recon/$var_ip/web/http_web_common.txt  
             echo "# 100% Complete HTTP Common (https_web_common.txt)"
-            sudo gobuster dir -e -k -u $var_protocol://$var_ip/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt > /home/chacka0101/targets/recon/$var_ip/web/https_web_medium.txt
-            echo "# 100% Complete HTTPS Medium (http_web_medium.txt)"
-            sudo gobuster dir -e -u $var_protocol://$var_ip/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt > /home/chacka0101/targets/recon/$var_ip/web/http_web_medium.txt
-            echo "# 100% Complete HTTP Medium (http_web_medium.txt)"          
-            sudo gobuster dir -e -k -u $var_protocol://$var_ip/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -t 100 -x .php,.txt,.html,.sh,.py,.pl,.cgi -s "204,301,302,307,200,403" -a CustomAgent -o /home/chacka0101/targets/recon/$var_ip/web/https_web_custom.txt
-            echo "# 100% Complete HTTPS Custom (https_web_custom.txt)"
-            sudo gobuster dir -e -u $var_protocol://$var_ip/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -t 100 -x .php,.txt,.html,.sh,.py,.pl,.cgi -s "204,301,302,307,200,403" -a CustomAgent -o /home/chacka0101/targets/recon/$var_ip/web/http_web_custom.txt
-            echo "# 100% Complete HTTP Custom (http_web_custom.txt)"
             echo "  "
             echo " Output: cd /home/chacka0101/targets/recon/$var_ip/web/"
             echo "  "
