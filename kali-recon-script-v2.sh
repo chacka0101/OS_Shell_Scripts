@@ -6,19 +6,18 @@ echo "
 [...]   Codename:               'kali-recon-script-v2.sh'       [...]
 [...]   Report bugs to:         chacka0101 @ gmail.com          [...]
 [...]   Homepage:               https://github.com/chacka0101/  [...]
-
 "
 PS3='└─# Press "Enter" or press (4) to exit: '
 echo " "
 echo "##############################################"
-echo "#                  MENU                      #"
+echo "#                  MENU 💀                   #"
 echo "##############################################"
 echo " "
-options=("Requirements" "Recon OS - Test ICMP - TraceRoute - Scan Ports NO ICMP - Commons UDP - ALL Ports TCP" "Recon WEB" "Exit")
+options=("Install requirements" "Recon OS - Test ICMP - TraceRoute - Scan Ports NO ICMP - Commons UDP - ALL Ports TCP" "Recon WEB - Headers - WEB Tech WAD - WEB Tech WhatWeb - WEB Directories with GoBuster" "Exit")
 select opt in "${options[@]}"
 do
     case $opt in
-        "Requirements")
+        "Install requirements")
 echo "##############################################"
             cd /home/chacka0101/
             echo "# Create directory: /home/chacka0101/tools"
@@ -157,7 +156,7 @@ echo "##############################################"
             echo "  "
             echo "  "
             ;;
-        "Recon WEB")
+        "Recon WEB - Headers - WEB Tech WAD - WEB Tech WhatWeb - WEB Directories with GoBuster")
 echo "##############################################"
             echo "# Recon WEB"
             echo "# ----------------------------"
@@ -187,10 +186,13 @@ echo "##############################################"
             cat /home/chacka0101/targets/recon/$var_ip/web/scan_web_tech_whatweb.txt    
             echo "  " 
             echo "# Scan WEB Directories with GoBuster"
-            sudo gobuster dir -e -k -u $var_protocol://$var_ip/ -w /usr/share/wordlists/dirb/common.txt -t 50 > /home/chacka0101/targets/recon/$var_ip/web/https_web_common.txt
-            echo "# 100% Complete HTTPS Common (https_web_common.txt)"
-            sudo gobuster dir -e -u $var_protocol://$var_ip/ -w /usr/share/wordlists/dirb/common.txt -t 50 > /home/chacka0101/targets/recon/$var_ip/web/http_web_common.txt  
-            echo "# 100% Complete HTTP Common (https_web_common.txt)"
+            if [ $var_protocol == "https" ]; then    
+                sudo gobuster dir -e -k -u $var_protocol://$var_ip/ -w /usr/share/wordlists/dirb/common.txt -t 50 > /home/chacka0101/targets/recon/$var_ip/web/https_web_common.txt
+                echo "# 100% Complete HTTPS Common (https_web_common.txt)";
+             else
+                sudo gobuster dir -e -u $var_protocol://$var_ip/ -w /usr/share/wordlists/dirb/common.txt -t 50 > /home/chacka0101/targets/recon/$var_ip/web/http_web_common.txt
+                echo "# 100% Complete HTTP Common (https_web_common.txt)"
+            fi
             echo "  "
             echo " Output: cd /home/chacka0101/targets/recon/$var_ip/web/"
             echo "  "
@@ -200,7 +202,7 @@ echo "##############################################"
 echo " "
 echo " "
 echo "#################################################"
-echo "#                     BYE                       #"
+echo "#                     BYE 💀                    #"
 echo "# The Matrix has you, follow the white rabbit.| #"
 echo "#################################################"
             break
