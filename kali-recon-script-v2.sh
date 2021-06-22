@@ -13,7 +13,7 @@ echo "##############################################"
 echo "#                  MENU 💀                   #"
 echo "##############################################"
 echo " "
-options=("Install requirements" "Recon OS - Test ICMP - TraceRoute - Scan Ports NO ICMP - Commons UDP - ALL Ports TCP" "Recon WEB - Headers - WEB Tech WAD - WEB Tech WhatWeb - WEB Directories with GoBuster" "Exit")
+options=("Install requirements" "Recon OS, ICMP, TraceRoute, Ports NO ICMP, UDP, ALL, UDP Open | Filtered" "Recon WEB - Headers, WAD, WhatWeb, Directories GoBuster" "Exit")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -193,13 +193,13 @@ echo "##############################################"
             echo "└─# Result Scan WEB Tech WhatWeb:"
             cat /home/chacka0101/targets/recon/$var_ip/web/scan_web_tech_whatweb.txt    
             echo "  " 
-            echo "# Scan WEB Directories with GoBuster"
+            echo "# Scan WEB Directories and Files with GoBuster"
             if [ $var_protocol == "https" ]; then    
-                sudo gobuster dir -e -k -u $var_protocol://$var_ip/ -w /usr/share/wordlists/dirb/common.txt -t 50 > /home/chacka0101/targets/recon/$var_ip/web/https_web_common.txt
-                echo "# 100% Complete HTTPS Common (https_web_common.txt)";
+                sudo gobuster dir -e -k -u $var_protocol://$var_ip/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -t 100 -x .php,.txt,.html,.sh,.py,.pl,.cgi -s "204,301,302,307,200,403" -a CustomAgent > /home/chacka0101/targets/recon/$var_ip/web/https_web_custom.txt
+                echo "# 100% Complete HTTPS Common (https_web_custom.txt)";
              else
-                sudo gobuster dir -e -u $var_protocol://$var_ip/ -w /usr/share/wordlists/dirb/common.txt -t 50 > /home/chacka0101/targets/recon/$var_ip/web/http_web_common.txt
-                echo "# 100% Complete HTTP Common (https_web_common.txt)"
+                sudo gobuster dir -e -u $var_protocol://$var_ip/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -t 100 -x .php,.txt,.html,.sh,.py,.pl,.cgi -s "204,301,302,307,200,403" -a CustomAgent > /home/chacka0101/targets/recon/$var_ip/web/http_web_custom.txt
+                echo "# 100% Complete HTTP Common (http_web_custom.txt)"
             fi
             echo "  "
             echo " Output: cd /home/chacka0101/targets/recon/$var_ip/web/"
