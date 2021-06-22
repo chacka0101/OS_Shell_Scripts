@@ -152,7 +152,7 @@ echo "##############################################"
             echo "  " 
             echo "# Scan commons Ports UDP Open | Filtered:"
             echo "  "
-            sudo nmap -sU -oG $base_directory/tmp_ports_udp_open_filtered.txt -vv $var_ip > /home/chacka0101/targets/recon/$var_ip/ports_udp_open_filtered.txt
+            sudo nmap -sU -vv $var_ip > /home/chacka0101/targets/recon/$var_ip/ports_udp_open_filtered.txt
             echo "┌──(root💀kali)-[/]"
             echo "└─# Result Scan Ports UDP Open | Filtered:"
             cat /home/chacka0101/targets/recon/$var_ip/ports_udp_open_filtered.txt
