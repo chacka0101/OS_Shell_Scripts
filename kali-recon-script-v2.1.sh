@@ -67,7 +67,7 @@ echo "##############################################"
             echo "  "
             echo "# END."
             ;;
-        "Recon OS - Test ICMP - TraceRoute - Scan Ports NO ICMP - Commons UDP - ALL Ports TCP")
+        "Recon OS, ICMP, TraceRoute, Ports NO ICMP, UDP, ALL, UDP Open | Filtered")
 echo "##############################################"
             echo "# Recon"
             echo "# ---------------------------------------------------------"
@@ -164,7 +164,7 @@ echo "##############################################"
             echo "  "
             echo "  "
             ;;
-        "Recon WEB - Headers - WEB Tech WAD - WEB Tech WhatWeb - WEB Directories with GoBuster")
+        "Recon WEB - Headers, WAD, WhatWeb, Directories GoBuster")
 echo "##############################################"
             echo "# Recon WEB"
             echo "# ----------------------------"
