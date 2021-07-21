@@ -59,6 +59,9 @@ echo "##############################################"
             echo "# Download WhatWeb:"
             sudo git clone https://github.com/urbanadventurer/WhatWeb.git
             echo "# OK."
+	    echo "# Download Davtest:"
+            sudo apt-get install davtest
+            echo "# OK."
             echo "# Install GoBuster:"
             echo "deb-src http://http.kali.org/kali kali-rolling main non-free contrib" >> /etc/apt/sources.list
             sudo apt update
@@ -184,14 +187,20 @@ echo "##############################################"
             echo "  "
             echo "# Scan WEB Tech WAD"
             sudo wad -u $var_protocol://$var_ip/ > /home/chacka0101/targets/recon/$var_ip/web/scan_web_tech_wad.txt
+	    echo "  "
             echo "# Scan WEB Tech WhatWEB"
             sudo /home/chacka0101/tools/WhatWeb/whatweb $var_protocol://$var_ip/ > /home/chacka0101/targets/recon/$var_ip/web/scan_web_tech_whatweb.txt
+            echo "  "
+            echo "# Scan WEB Davtest"
+            sudo davtest -url $var_protocol://$var_ip/ > /home/chacka0101/targets/recon/$var_ip/web/scan_web_davtest.txt
             echo "  "
             echo "┌──(root💀kali)-[/]"
             echo "└─# Result Scan WEB Tech WAD:"
             cat /home/chacka0101/targets/recon/$var_ip/web/scan_web_tech_wad.txt
             echo "└─# Result Scan WEB Tech WhatWeb:"
             cat /home/chacka0101/targets/recon/$var_ip/web/scan_web_tech_whatweb.txt    
+	    echo "└─# Result Scan Davtest:"
+            cat /home/chacka0101/targets/recon/$var_ip/web/scan_web_davtest.txt   
             echo "  " 
             echo "# Scan WEB Directories and Files with GoBuster"
             if [ $var_protocol == "https" ]; then    
