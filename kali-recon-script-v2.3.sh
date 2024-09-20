@@ -204,10 +204,10 @@ echo "##############################################"
             echo "  " 
             echo "# Scan WEB Directories and Files with GoBuster"
             if [ $var_protocol == "https" ]; then    
-                sudo gobuster dir -e -k -u $var_protocol://$var_ip/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -t 100 -x .php,.txt,.html,.sh,.py,.pl,.cgi -s "204,301,302,307,200,403" -a CustomAgent > /home/chacka0101/targets/recon/$var_ip/web/https_web_custom.txt
+                sudo gobuster dir -e -k -u $var_protocol://$var_ip/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -t 100 -x .php,.txt,.html,.sh,.py,.pl,.cgi -a CustomAgent > /home/chacka0101/targets/recon/$var_ip/web/https_web_custom.txt
                 echo "# 100% Complete HTTPS Common (https_web_custom.txt)";
              else
-                sudo gobuster dir -e -u $var_protocol://$var_ip/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -t 100 -x .php,.txt,.html,.sh,.py,.pl,.cgi -s "204,301,302,307,200,403" -a CustomAgent > /home/chacka0101/targets/recon/$var_ip/web/http_web_custom.txt
+                sudo gobuster dir -e -u $var_protocol://$var_ip/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -t 100 -x .php,.txt,.html,.sh,.py,.pl,.cgi -a CustomAgent > /home/chacka0101/targets/recon/$var_ip/web/http_web_custom.txt
                 echo "# 100% Complete HTTP Common (http_web_custom.txt)"
             fi
             echo "  "
