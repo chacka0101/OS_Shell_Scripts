@@ -86,7 +86,7 @@ echo "##############################################"
             echo "  "
             echo "# Recon OS:"
             echo "  "
-            sudo python /home/chacka0101/tools/recon_os.py $var_ip > /home/chacka0101/targets/recon/$var_ip/recon_os.txt
+            sudo python2 /home/chacka0101/tools/recon_os.py $var_ip > /home/chacka0101/targets/recon/$var_ip/recon_os.txt
             echo "┌──(root💀kali)-[/]"
             echo "└─# Recon OS:"
             cat /home/chacka0101/targets/recon/$var_ip/recon_os.txt     
