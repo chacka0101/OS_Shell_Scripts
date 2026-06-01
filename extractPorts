@@ -1,0 +1,13 @@
+#!/bin/bash
+
+function extractPorts(){
+        ports="$(cat $1 | grep -oP '\d{1,5}/open' | cut -d '/' -f1 | xargs | tr ' ' ',')"
+        ip_address="$(cat $1 | grep -oP '\d{1,3}(\.\d{1,3}){3}' | head -n 1)"
+
+        echo -e "\n[*] Extracting information...\n"
+        echo -e "\t[*] IP Address: $ip_address"
+        echo -e "\t[*] Open ports: $ports\n"
+
+        echo $ports | tr -d '\n' | xclip -sel clip
+        echo -e "[*] Ports copied to clipboard\n"
+}
